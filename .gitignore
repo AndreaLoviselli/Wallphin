@@ -1,0 +1,6 @@
+# Ignore build and VS folders
+bin/
+obj/
+.vs/
+*.user
+*.suo
