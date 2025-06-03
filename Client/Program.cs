@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Syncfusion.Blazor;
 using Wallphin.Client;
 
 namespace Wallphin.Client
@@ -13,6 +14,7 @@ namespace Wallphin.Client
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddSyncfusionBlazor();
 
             await builder.Build().RunAsync();
         }
