@@ -8,12 +8,16 @@ namespace Wallphin
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            var licenseKey = builder.Configuration["SyncfusionLicense"];
+
             // Add services to the container.
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
 
             var app = builder.Build();
+
+            app.MapGet("/api/license", () => licenseKey);
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

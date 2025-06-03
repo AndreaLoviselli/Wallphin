@@ -13,7 +13,12 @@ namespace Wallphin.Client
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            var httpClient = new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) };
+
+            var licenseKey = await httpClient.GetStringAsync("api/license");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(licenseKey);
+
+            builder.Services.AddScoped(sp => httpClient);
             builder.Services.AddSyncfusionBlazor();
 
             await builder.Build().RunAsync();
